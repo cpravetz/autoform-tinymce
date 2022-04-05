@@ -1,8 +1,14 @@
+const tinymce = require("tinymce");
+
 Template.autoformTinyMCE.onRendered(function() {
     var initOptions = this.data || {};
     var id = this.firstNode.id;
     initOptions.selector = '#' + id;
-    initOptions.skin_url = Meteor.absoluteUrl('packages/teamon_tinymce/skins/lightgray');
+    initOptions.base_url = '/tinymce';
+    initOptions.plugins = initOptions.plugins || 'link table';
+    initOptions.toolbar = initOptions.toolbar || 'table link';
+    initOptions.menubar = false;
+    initOptions.statusbar = false;
     tinymce.init(initOptions);
 
     var editor = tinymce.get(id);
